@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -22,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next.config.mjs"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/(mock)/mock/page.tsx", "app/(landingPage)/_components/Hero.jsx", "app/(landingPage)/page.jsx", "components/nav-bar/index.jsx", "components/dictaphone.jsx", "server.ts"],
   "exclude": ["node_modules"]
 }
