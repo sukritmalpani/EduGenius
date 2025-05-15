@@ -23,6 +23,15 @@ import {
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { user, isAuthenticated, isLoading } = useKindeBrowserClient();
+  console.log("User:", user);
+  console.log("Is Authenticated:", isAuthenticated);
+  console.log("Is Loading:", isLoading);
+  console.log("Menu Open:", menuOpen);
+  console.log("Kinde Client:", useKindeBrowserClient());
+  console.log("Kinde Client User:", user);
+  console.log("Kinde Client Authenticated:", isAuthenticated);
+  console.log("Kinde Client Loading:", isLoading);
+  console.log("Menu Open State:", menuOpen);
 
   return (
     <motion.nav
