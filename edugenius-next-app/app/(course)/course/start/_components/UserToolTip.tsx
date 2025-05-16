@@ -1,11 +1,13 @@
 interface UserToolTipProps {
   username: string;
   userProfileImage?: string;
+  tooltipContent?: React.ReactNode;
 }
 
 export default function UserToolTip({
   username,
   userProfileImage,
+  tooltipContent = "View profile",
 }: UserToolTipProps) {
   return (
     <div className="relative group inline-block">

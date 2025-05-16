@@ -1,12 +1,14 @@
+import { ChapterType } from "@/types/resume.type";
+import React from "react";
 export type ChapterListCardProps = {
-  chapter: { chapter_name: string };
+  chapter: ChapterType;
   index: number;
   onClick?: () => void;
   isActive?: boolean;
   isCompleted?: boolean;
 };
 
-export default function ChapterListCard({
+const ChapterListCard = React.memo(function ChapterListCard({
   chapter,
   index,
   onClick,
@@ -22,4 +24,6 @@ export default function ChapterListCard({
       {chapter.chapter_name}
     </div>
   );
-}
+});
+
+export default ChapterListCard;

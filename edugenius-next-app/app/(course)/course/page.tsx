@@ -6,6 +6,11 @@ import { CourseList } from "@/db/schema/chapter";
 import type { CourseType } from "@/types/resume.type";
 import { eq } from "drizzle-orm";
 
+import Header from "../../course-dashboard/_components/Header";
+import CourseBasicInfo from "../../create-course/[courseId]/_components/CourseBasicInfo";
+import CourseDetail from "../../create-course/[courseId]/_components/CourseDetail";
+import ChapterList from "../../create-course/[courseId]/_components/ChapterList";
+
 type CourseParams = {
   params: {
     courseId: string;
@@ -17,22 +22,24 @@ const Course = ({ params }: CourseParams) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const getCourse = async () => {
+    setLoading(true);
+    try {
+      const result = await db
+        .select()
+        .from(CourseList)
+        .where(eq(CourseList.courseId, params.courseId));
+      setCourse(result[0] as CourseType);
+      setError(null);
+    } catch {
+      setError("Failed to load course");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchCourse = async () => {
-      setLoading(true);
-      try {
-        const result = await db
-          .select()
-          .from(CourseList)
-          .where(eq(CourseList.courseId, params.courseId));
-        setCourse(result[0] as CourseType);
-      } catch (err) {
-        setError("Failed to load course");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchCourse();
+    getCourse();
   }, [params]);
 
   if (loading) {
@@ -52,9 +59,17 @@ const Course = ({ params }: CourseParams) => {
   }
 
   return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold">{course.courseOutput.topic}</h1>
-      <p className="mt-2 text-gray-400">{course.courseName}</p>
+    <div className="container mx-auto px-4 py-8 space-y-8">
+      <Header title={course.courseOutput.topic} />
+      <div className="space-y-6">
+        <CourseBasicInfo
+          courseInfo={course}
+          onRefresh={getCourse}
+          edit={false}
+        />
+        <CourseDetail courseDetail={course} />
+        <ChapterList course={course} onRefresh={getCourse} edit={false} />
+      </div>
     </div>
   );
 };

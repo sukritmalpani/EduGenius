@@ -24,10 +24,19 @@ export const executeCode = async (
   language: keyof typeof LANGUAGE_VERSIONS,
   sourceCode: string
 ): Promise<ExecutionResult> => {
-  const response = await API.post<ExecutionResult>("/execute", {
-    language,
-    version: LANGUAGE_VERSIONS[language],
-    files: [{ content: sourceCode }],
-  });
-  return response.data;
+  try {
+    const response = await API.post<ExecutionResult>(
+      "/execute",
+      {
+        language,
+        version: LANGUAGE_VERSIONS[language],
+        files: [{ content: sourceCode }],
+      },
+      { timeout: 10000 }
+    );
+    return response.data;
+  } catch (err: any) {
+    console.error("Execution error:", err);
+    throw new Error("Failed to execute code");
+  }
 };
