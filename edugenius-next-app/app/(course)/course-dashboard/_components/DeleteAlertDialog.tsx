@@ -1,5 +1,3 @@
-// DeleteAlertDialog.tsx
-
 import {
   AlertDialog,
   AlertDialogAction,
@@ -10,6 +8,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { FaTrashAlt } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 type DeleteAlertDialogProps = {
   open: boolean;
@@ -31,6 +31,10 @@ const DeleteAlertDialog = ({
     <AlertDialog open={open}>
       <AlertDialogContent className="max-w-md bg-[#1A1A2E] border border-[#8A2BE2] shadow-lg rounded-xl overflow-hidden">
         <AlertDialogHeader className="space-y-3">
+          <div className="mx-auto bg-red-500/10 p-4 rounded-full w-fit mb-4">
+            <FaTrashAlt className="h-8 w-8 text-red-500" />
+          </div>
+
           <AlertDialogTitle className="text-center text-2xl font-bold text-[#00FFFF]">
             Delete Course
           </AlertDialogTitle>
@@ -47,7 +51,7 @@ const DeleteAlertDialog = ({
             Cancel
           </AlertDialogCancel>
           <AlertDialogAction
-            onClick={deleteCourse}
+            onClick={() => deleteCourse()}
             className="mt-2 sm:mt-0 w-full bg-red-500 hover:bg-red-600 text-white focus:ring-red-500 transition-all rounded-lg py-2.5"
           >
             Delete Course

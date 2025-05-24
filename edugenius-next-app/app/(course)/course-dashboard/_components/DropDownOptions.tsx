@@ -1,9 +1,6 @@
-// DropDownOptions.tsx
 "use client";
 
 import type React from "react";
-import { motion } from "framer-motion";
-import { FaTrashAlt, FaEdit, FaShareAlt } from "react-icons/fa";
 import { useState } from "react";
 import {
   DropdownMenu,
@@ -11,6 +8,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { FaTrashAlt, FaEdit, FaShareAlt } from "react-icons/fa";
+import DeleteAlertDialog from "./DeleteAlertDialog";
+import { motion } from "framer-motion";
 
 type DropDownOptionsProps = {
   children: React.ReactNode;
@@ -21,6 +21,8 @@ const DropDownOptions = ({
   children,
   handleDeleteCourse,
 }: DropDownOptionsProps) => {
+  const [openDeleteAlertDialog, setOpenDeleteAlertDialog] = useState(false);
+
   return (
     <div>
       <DropdownMenu>
@@ -47,12 +49,19 @@ const DropDownOptions = ({
           </DropdownMenuItem>
           <DropdownMenuItem
             className="cursor-pointer flex items-center gap-3 py-3 px-4 text-red-400 hover:bg-red-700/20 transition-all"
+            onClick={() => setOpenDeleteAlertDialog(true)}
           >
             <FaTrashAlt size={14} />
             <span>Delete Course</span>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+
+      <DeleteAlertDialog
+        open={openDeleteAlertDialog}
+        setIsOpen={setOpenDeleteAlertDialog}
+        handleDeleteCourse={handleDeleteCourse}
+      />
     </div>
   );
 };
