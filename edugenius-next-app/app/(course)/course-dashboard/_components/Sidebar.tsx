@@ -3,15 +3,23 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { navList } from "../_constants/navList"
+import { navList } from "../_constants/navList";
+import WordRotate from "@/components/ui/word-rotate";
 
 const Sidebar = () => {
   const path = usePathname();
 
   return (
     <div className="fixed h-full md:w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 shadow-sm transition-all duration-300 ease-in-out">
-      <div className="px-6 py-4">
-        <h1 className="text-2xl font-bold text-center text-indigo-600">Sidebar</h1>
+      <div className="p-6">
+        <WordRotate
+          className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent text-center"
+          words={["AI", "Course", "Generator"]}
+        />
+      </div>
+
+      <div className="px-3">
+        <div className="h-px bg-gradient-to-r from-transparent via-slate-300 dark:via-slate-700 to-transparent my-4"></div>
       </div>
 
       <nav className="px-3 py-2">
