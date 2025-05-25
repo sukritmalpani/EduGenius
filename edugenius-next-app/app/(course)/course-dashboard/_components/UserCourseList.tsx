@@ -1,13 +1,14 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
 import { db } from "@/configs/db";
 import { CourseList } from "@/db/schema/chapter";
 import type { CourseType } from "@/types/resume.type";
 import { eq } from "drizzle-orm";
+import { useContext, useEffect, useState } from "react";
+import CourseCard from "./CourseCard";
 import { UserCourseListContext } from "@/app/(course)/_context/UserCourseList.context";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import SkeletonLoading from "./SkeletonLoading";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { BookOpen, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -34,6 +35,7 @@ const UserCourseList = () => {
         .select()
         .from(CourseList)
         .where(eq(CourseList.createdBy, user?.email ?? ""));
+
       setCourses(res as CourseType[]);
       setUserCourseList(res as CourseType[]);
     } catch (error) {
@@ -58,7 +60,9 @@ const UserCourseList = () => {
         <div className="bg-[#8A2BE2]/20 p-6 rounded-full mb-6">
           <BookOpen className="h-10 w-10 text-[#00FFFF]" />
         </div>
-        <h3 className="text-2xl font-bold mb-3 text-[#00FFFF]">No courses yet</h3>
+        <h3 className="text-2xl font-bold mb-3 text-[#00FFFF]">
+          No courses yet
+        </h3>
         <p className="text-[#A1A1C1] max-w-md mb-8 text-lg">
           You haven't created any courses yet. Get started by creating your
           first AI-generated course.
@@ -76,7 +80,25 @@ const UserCourseList = () => {
     );
   }
 
-  return null; // Will be replaced in next commit
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5, staggerChildren: 0.1 }}
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+    >
+      {courses.map((course, index) => (
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: index * 0.1 }}
+        >
+          <CourseCard course={course} onRefresh={() => getUserCourses()} />
+        </motion.div>
+      ))}
+    </motion.div>
+  );
 };
 
 export default UserCourseList;
