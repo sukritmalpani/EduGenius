@@ -1,4 +1,3 @@
-// app/(course)/create-course/[courseId]/page.tsx
 "use client";
 
 import { db } from "@/configs/db";
@@ -30,7 +29,7 @@ const CoursePageLayout = ({ params }: { params: ParamsType }) => {
     if (user?.email) {
       getCourse();
     }
-  }, [user, params, refreshKey]);
+  }, [user, params, refreshKey]); // Refreshes course when user changes or refresh is triggered
 
   const getCourse = async () => {
     if (!user?.email) return;
@@ -60,7 +59,7 @@ const CoursePageLayout = ({ params }: { params: ParamsType }) => {
   const handleGenerateCourseContent = async () => {
     try {
       setLoading(true);
-      await generateCourseContent(course!, setLoading);
+      await generateCourseContent(course, setLoading);
       await db
         .update(CourseList)
         .set({ isPublished: true })
