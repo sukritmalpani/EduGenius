@@ -4,6 +4,7 @@ import { stepperOptions } from "./_constants/stepperOptions";
 import { Button } from "@/components/ui/button";
 import SelectCategory from "./_components/SelectCategory";
 import TopicDesc from "./_components/TopicDesc";
+import SelectOption from "./_components/SelectOption";
 
 const CreateCoursePage = () => {
   const [step, setStep] = useState(0);
@@ -21,6 +22,7 @@ const CreateCoursePage = () => {
       <div>
         {step === 0 && <SelectCategory />}
         {step === 1 && <TopicDesc />}
+        {step === 2 && <SelectOption />}
         {/* other steps will come */}
       </div>
       <div>
