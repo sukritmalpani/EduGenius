@@ -5,12 +5,15 @@ import { Button } from "@/components/ui/button";
 import SelectCategory from "./_components/SelectCategory";
 import TopicDesc from "./_components/TopicDesc";
 import SelectOption from "./_components/SelectOption";
+import LoadingDialog from "./_components/LoadingDialog";
 
 const CreateCoursePage = () => {
   const [step, setStep] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   return (
     <div className="max-w-4xl mx-auto">
+      <LoadingDialog loading={loading} />
       <h1>Create Your AI Course</h1>
       {/* stepper */}
       <div>
