@@ -43,3 +43,91 @@ export const generateCourseLayout = model.startChat({
     },
   ],
 });
+
+export const generatePathway = model.startChat({
+  generationConfig,
+  history: [
+    {
+      role: "user",
+      parts: [
+        {
+          text: "Generate a detailed learning pathway for a given career. The response should be in JSON format and include the following fields: title, description, estimatedTime, difficulty, prerequisites (array), and steps (array of objects with title, description, estimatedTime, and resources fields). Each step's resources should be an array of objects with title and url fields.",
+        },
+      ],
+    },
+    {
+      role: "model",
+      parts: [
+        {
+          text: "Understood. I'll generate a detailed learning pathway in the specified JSON format when provided with a career and description. Here's an example of the expected output format:",
+        },
+        {
+          text: `
+\`\`\`json
+{
+  "title": "Full Stack Web Developer Learning Path",
+  "description": "This comprehensive learning path will guide you through becoming a proficient full stack web developer, covering both front-end and back-end technologies, as well as essential tools and practices in modern web development.",
+  "estimatedTime": "6-8 months",
+  "difficulty": "Intermediate",
+  "prerequisites": [
+    "Basic understanding of HTML, CSS, and JavaScript",
+    "Familiarity with command-line interfaces",
+    "Problem-solving skills and logical thinking"
+  ],
+  "steps": [
+    {
+      "title": "Advanced JavaScript and ES6+",
+      "description": "Deepen your understanding of JavaScript, including modern ES6+ features, asynchronous programming, and functional programming concepts.",
+      "estimatedTime": "3 weeks",
+      "resources": [
+        {
+          "title": "JavaScript.info",
+          "url": "https://javascript.info/"
+        },
+        {
+          "title": "Eloquent JavaScript",
+          "url": "https://eloquentjavascript.net/"
+        }
+      ]
+    },
+    {
+      "title": "React Fundamentals",
+      "description": "Learn the basics of React, including components, state management, and hooks.",
+      "estimatedTime": "4 weeks",
+      "resources": [
+        {
+          "title": "React Official Documentation",
+          "url": "https://reactjs.org/docs/getting-started.html"
+        },
+        {
+          "title": "React Tutorial by Tao of React",
+          "url": "https://www.taoofcode.net/react-tutorial/"
+        }
+      ]
+    },
+    {
+      "title": "Node.js and Express",
+      "description": "Explore server-side JavaScript with Node.js and build RESTful APIs using Express.",
+      "estimatedTime": "3 weeks",
+      "resources": [
+        {
+          "title": "Node.js Official Documentation",
+          "url": "https://nodejs.org/en/docs/"
+        },
+        {
+          "title": "Express.js Guide",
+          "url": "https://expressjs.com/en/guide/routing.html"
+        }
+      ]
+    }
+  ]
+}
+\`\`\`
+
+This example demonstrates the structure and content expected for a learning pathway. When generating a pathway for a specific career, I'll follow this format, adjusting the content to match the given career and description.
+          `,
+        },
+      ],
+    },
+  ],
+});
