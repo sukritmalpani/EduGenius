@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/select';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, MapPin, ExternalLink, DollarSign, Clock, Bookmark } from 'lucide-react';
+import { Calendar, MapPin, ExternalLink, DollarSign, Clock, Bookmark, X } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -54,7 +54,8 @@ export default function InternshipsPage() {
     try {
       const response = await fetch('/api/internship');
       let data = await response.json();
-      data = data.slice(10); // Remove first 10 elements
+        // remove first 10 element
+        data = data.slice(10)
       setInternships(data);
     } catch (error) {
       console.error('Error fetching internships:', error);
@@ -74,11 +75,11 @@ export default function InternshipsPage() {
     filtered.sort((a, b) => {
       if (sortBy === 'posted_time') {
         return new Date(b.posted_time).getTime() - new Date(a.posted_time).getTime();
-      } else {
-        const stipendA = parseInt(a.stipend.replace(/[^\d]/g, '')) || 0;
-        const stipendB = parseInt(b.stipend.replace(/[^\d]/g, '')) || 0;
+      } 
+        const stipendA = Number.parseInt(a.stipend.replace(/[^\d]/g, ''));
+        const stipendB = Number.parseInt(b.stipend.replace(/[^\d]/g, ''));
         return stipendB - stipendA;
-      }
+      
     });
 
     setFilteredInternships(filtered);
@@ -97,7 +98,6 @@ export default function InternshipsPage() {
       <h1 className="text-4xl font-bold mb-8 text-center">
         Latest Internship Opportunities
       </h1>
-
       <div className="flex flex-col md:flex-row gap-4 mb-8">
         <Input
           placeholder="Search internships..."
@@ -105,7 +105,6 @@ export default function InternshipsPage() {
           onChange={(e) => setSearchTerm(e.target.value)}
           className="flex-grow"
         />
-
         <Select value={locationFilter} onValueChange={(value) => setLocationFilter(value)}>
           <SelectTrigger className="w-full md:w-[180px]">
             <SelectValue placeholder="Location" />
@@ -119,7 +118,6 @@ export default function InternshipsPage() {
             ))}
           </SelectContent>
         </Select>
-
         <Select value={sortBy} onValueChange={(value: 'posted_time' | 'stipend') => setSortBy(value)}>
           <SelectTrigger className="w-full md:w-[180px]">
             <SelectValue placeholder="Sort By" />
@@ -130,7 +128,6 @@ export default function InternshipsPage() {
           </SelectContent>
         </Select>
       </div>
-
       <AnimatePresence>
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
@@ -160,7 +157,6 @@ export default function InternshipsPage() {
                     </Button>
                   </CardTitle>
                 </CardHeader>
-
                 <CardContent className="flex-grow flex flex-col justify-between">
                   <div>
                     <p className="text-sm text-muted-foreground mb-2">{internship.company}</p>
@@ -181,15 +177,10 @@ export default function InternshipsPage() {
                       Posted {internship.posted_time}
                     </p>
                   </div>
-
                   <div className="flex gap-2 mt-4">
                     <Dialog>
                       <DialogTrigger asChild>
-                        <Button
-                          variant="outline"
-                          className="flex-grow"
-                          onClick={() => setSelectedInternship(internship)}
-                        >
+                        <Button variant="outline" className="flex-grow" onClick={() => setSelectedInternship(internship)}>
                           Quick View
                         </Button>
                       </DialogTrigger>
@@ -217,17 +208,12 @@ export default function InternshipsPage() {
                           </p>
                         </div>
                         <Button asChild className="w-full mt-4">
-                          <a
-                            href={selectedInternship?.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
+                          <a href={selectedInternship?.link} target="_blank" rel="noopener noreferrer">
                             Apply Now
                           </a>
                         </Button>
                       </DialogContent>
                     </Dialog>
-
                     <Button asChild className="flex-grow">
                       <a href={internship.link} target="_blank" rel="noopener noreferrer">
                         <ExternalLink className="mr-2" size={16} />
