@@ -44,6 +44,28 @@ export const generateCourseLayout = model.startChat({
   ],
 });
 
+export const generateCourseChapters = model.startChat({
+  generationConfig,
+  history: [
+    {
+      role: "user",
+      parts: [
+        {
+          text: "Explain the concepts in detail on Topic: Python Basics, Chapter: Introduction to python, in JSON Format with list of array with fields as Title, explanation of given chapter in detail, code examples (code field <precode> format) if applicable. Additionally, generate 3-4 questions to test the user's understanding of the chapter.",
+        },
+      ],
+    },
+    {
+      role: "model",
+      parts: [
+        {
+          text: '```json\n[\n  {\n    "title": "What is Python?",\n    "explanation": "Python is a high-level, interpreted, general-purpose programming language. It\'s known for its readability, versatility, and extensive libraries, making it suitable for a wide range of applications, from web development and data science to scripting and automation.",\n    "code_examples": [],\n    "quiz": [\n      { "question": "What does Python support?", "options": ["Integers", "Strings", "Loops", "All of the above"], "answer": "All of the above" },\n      { "question": "What is a variable in Python?", "options": ["A placeholder for data", "A fixed value", "A constant", "None of the above"], "answer": "A placeholder for data" }\n    ]\n  },\n  {\n    "title": "Why Python?",\n    "explanation": "Python\'s popularity stems from several key advantages:\\n\\n* **Readability:** Python\'s syntax is designed to be clear and concise, resembling natural language, making it easier to learn and understand.\\n* **Versatility:** Python is widely used in various domains, including web development, data analysis, machine learning, scientific computing, and more.\\n* **Extensive Libraries:** Python offers a vast collection of pre-built libraries that provide ready-to-use tools for specific tasks, saving developers time and effort.\\n* **Large Community:** Python boasts a vibrant and active community, providing ample resources, support, and contributions.\\n* **Beginner-Friendly:** Python\'s simplicity and focus on readability make it an excellent choice for beginners entering the world of programming.",\n    "code_examples": [],\n    "quiz": [\n      { "question": "Why is Python considered beginner-friendly?", "options": ["Its readability", "Its speed", "Its complexity", "Its extensive libraries"], "answer": "Its readability" }\n    ]\n  }\n]\n```',
+        },
+      ],
+    },
+  ],
+});
+
 export const generatePathway = model.startChat({
   generationConfig,
   history: [
