@@ -49,7 +49,7 @@ export default function RootLayout({
           >
             {children}
             <span>
-              <Dictaphone />
+              {/* <Dictaphone /> */}
             </span>
             <Toaster />
           </ThemeProvider>

@@ -23,15 +23,6 @@ import {
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { user, isAuthenticated, isLoading } = useKindeBrowserClient();
-  console.log("User:", user);
-  console.log("Is Authenticated:", isAuthenticated);
-  console.log("Is Loading:", isLoading);
-  console.log("Menu Open:", menuOpen);
-  console.log("Kinde Client:", useKindeBrowserClient());
-  console.log("Kinde Client User:", user);
-  console.log("Kinde Client Authenticated:", isAuthenticated);
-  console.log("Kinde Client Loading:", isLoading);
-  console.log("Menu Open State:", menuOpen);
 
   return (
     <motion.nav
@@ -58,6 +49,7 @@ export default function Navbar() {
       <div className="hidden md:flex items-center space-x-4">
         {isLoading ? null : isAuthenticated ? (
           <DropdownMenu>
+            <h1>Hi</h1>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="relative h-9 w-9 rounded-full">
                 <Avatar className="h-9 w-9 border border-[#8A2BE2]">

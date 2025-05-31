@@ -22,6 +22,13 @@ const generationConfig = {
   responseMimeType: "application/json",
 };
 
+export const chatSession = model.startChat({
+  generationConfig,
+
+  // safetySettings: Adjust safety settings
+  // See https://ai.google.dev/gemini-api/docs/safety-settings
+});
+
 export const generateCourseLayout = model.startChat({
   generationConfig,
   history: [
@@ -38,6 +45,28 @@ export const generateCourseLayout = model.startChat({
       parts: [
         {
           text: '```json\n{\n  "category": "programming",\n  "topic": "python",\n   "description": "Python is a high-level, general-purpose programming language known for its simplicity, readability, and versatility. Its widely used for web development, data analysis, machine learning, and automation tasks.",\n "level": "basic",\n  "duration": "1 hour",\n  "chapters": [\n    {\n      "chapter_name": "Introduction to Python",\n      "description": "This chapter covers the basics of Python programming, including data types, variables, operators, and control flow.",\n      "duration": "15 minutes"\n    },\n    {\n      "chapter_name": "Working with Data Structures",\n      "description": "This chapter explores fundamental data structures like lists, tuples, dictionaries, and sets.",\n      "duration": "20 minutes"\n    },\n    {\n      "chapter_name": "Functions and Modules",\n      "description": "This chapter teaches how to define and use functions, as well as import and utilize modules.",\n      "duration": "15 minutes"\n    },\n    {\n      "chapter_name": "Loops and Iteration",\n      "description": "This chapter focuses on different looping mechanisms like \'for\' and \'while\' loops to iterate over data.",\n      "duration": "10 minutes"\n    },\n    {\n      "chapter_name": "Basic Input and Output",\n      "description": "This chapter covers how to take user input and display output using Python.",\n      "duration": "10 minutes"\n    }\n  ]\n}\n```\n',
+        },
+      ],
+    },
+  ],
+});
+
+export const generateRecommendations = model.startChat({
+  generationConfig,
+  history: [
+    {
+      role: "user",
+      parts: [
+        {
+          text: "Generate personalized learning recommendations for an user who just now completed course Python : Complete Guide based on their interests, skills, and goals.  The response should include a list of recommended courses, tutorials, or resources tailored to the user's profile.",
+        },
+      ],
+    },
+    {
+      role: "model",
+      parts: [
+        {
+          text: '```json\n[\n {\n   "title": "Data Science Fundamentals",\n   "description": "Learn the basics of data science, including data analysis, visualization, and machine learning concepts.",\n   "category": "Data Science",\n   "level": "Intermediate",\n   "duration": "4 weeks"\n },\n {\n   "title": "JavaScript for Beginners",\n   "description": "Get started with JavaScript programming, covering syntax, functions, and DOM manipulation.",\n   "category": "Web Development",\n   "level": "Beginner",\n   "duration": "3 weeks"\n },\n {\n   "title": "Python Automation with Selenium",\n   "description": "Automate web tasks using Python and Selenium, a powerful tool for browser automation.",\n   "category": "Automation",\n   "level": "Advanced",\n   "duration": "2 weeks"\n }\n]\n```',
         },
       ],
     },
