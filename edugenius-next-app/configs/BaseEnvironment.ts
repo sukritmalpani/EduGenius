@@ -18,6 +18,7 @@ export class BaseEnvironment {
     FIREBASE_APP_ID: "1:696369049065:web:772f101df72c608bf9ef78",
     FIREBASE_MEASUREMENT_ID: "G-6SG8WQ3PPV",
     YOUTUBE_API_KEY: "AIzaSyD9Al_kkxgoSF-tzrRq_YOXYy975wAlqSM",
+    GROQ_API_KEY: "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",
   };
 
   get environment(): Environment {
@@ -98,6 +99,13 @@ export class BaseEnvironment {
     return (
       process.env.NEXT_PUBLIC_YOUTUBE_API_KEY! ||
       this.defaultEnvironmentValues.YOUTUBE_API_KEY
+    );
+  }
+
+  get GROQ_API_KEY(): string {
+    return (
+      process.env.GROQ_API_KEY! ||
+      this.defaultEnvironmentValues.GROQ_API_KEY
     );
   }
 }
