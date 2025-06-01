@@ -62,9 +62,7 @@ export class BaseEnvironment {
   }
 
   get GROQ_API_KEY(): string {
-    return (
-      process.env.NEXT_PUBLIC_GROQ_API_KEY! ||
-      // this.defaultEnvironmentValues.GROQ_API_KEY
-    );
+    return process.env.NEXT_PUBLIC_GROQ_API_KEY! || "default_groq_api_key";
+    // this.defaultEnvironmentValues.GROQ_API_KEY
   }
 }
