@@ -1,7 +1,7 @@
 import { Groq } from "groq-sdk/index.mjs";
 
 const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY,
+  apiKey: process.env.NEXT_PUBLIC_GROQ_API_KEY,
 });
 
 export async function processDescriptionAndQuery(description: string, query: string): Promise<string> {
