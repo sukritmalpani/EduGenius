@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/context/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import QueryProvider from "@/context/query-provider";
 import Navbar from "./(landingPage)/components/navbar";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import {
   LogoutLink,
   useKindeBrowserClient,
@@ -48,12 +49,11 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             {children}
-            <span>
-              {/* <Dictaphone /> */}
-            </span>
+            <span>{/* <Dictaphone /> */}</span>
             <Toaster />
           </ThemeProvider>
         </QueryProvider>
+        <SpeedInsights />
       </body>
     </html>
   );

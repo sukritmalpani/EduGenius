@@ -124,7 +124,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="absolute top-16 left-0 w-full bg-[#1A1A2E] shadow-md border-t border-[#2C3E50] md:hidden">
+        <div className="fixed top-16 left-0 w-full bg-[#1A1A2E] shadow-md border-t border-[#2C3E50] md:hidden z-50">
           <div className="flex flex-col space-y-4 py-4 px-6">
             <NavLink href="/course-dashboard">AI Courses</NavLink>
             <NavLink href="/dashboard">AI Resume</NavLink>
