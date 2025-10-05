@@ -6,7 +6,7 @@ import {
 import { BaseEnvironment } from "./BaseEnvironment";
 
 const env = new BaseEnvironment();
-export const MODEL = "gemini-1.5-flash";
+export const MODEL = "gemini-2.5-flash";
 
 const genAI = new GoogleGenerativeAI(env.GOOGLE_GEMENI_API_KEY);
 
